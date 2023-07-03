@@ -1,5 +1,8 @@
 package com.yuvraj.SpringBootEmployee.dao;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,41 @@ public class EmployeeDao {
 	}
 	public Employee getEmployee(int id) {
 		// TODO Auto-generated method stub
-		return repo.findById(id).get();
+		Optional<Employee> optional= repo.findById(id);
+		if(optional.isEmpty())return null;
+		return optional.get();
+	}
+	public List<Employee> getAllEmployees() {
+		// TODO Auto-generated method stub
+		List<Employee> list =repo.findAll();
+		return list;
+	}
+	public Employee deleteEmployee(int id) {
+		// TODO Auto-generated method stub
+		Optional<Employee> optional =repo.findById(id);
+		if(optional.isEmpty())return null;
+		repo.delete(optional.get());
+		return optional.get();
+	}
+	public Employee updateEmployee(int id, Employee employee) {
+		// TODO Auto-generated method stub
+		Optional<Employee> optional=repo.findById(id);
+		
+		if(optional.isEmpty())return null;
+		Employee dBEmployee =optional.get();
+		employee.setId(dBEmployee.getId());
+		repo.save(employee);
+		return employee;
+		
+	}
+	public Employee updateEmployeeSalary(int id, double employee) {
+		// TODO Auto-generated method stub
+Optional<Employee> optional=repo.findById(id);
+		
+		if(optional.isEmpty())return null;
+		Employee dBEmployee =optional.get();
+		dBEmployee.setSalary(employee);
+		repo.save(dBEmployee);
+		return dBEmployee;
 	}
 }
