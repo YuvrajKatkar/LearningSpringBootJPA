@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yuvraj.SpringBootEmployee.dto.Employee;
 import com.yuvraj.SpringBootEmployee.repo.EmployeeRepo;
+import com.yuvraj.SpringBootEmployee.util.ResponseStructure;
 @Repository
 public class EmployeeDao {
 	@Autowired
@@ -55,5 +56,22 @@ Optional<Employee> optional=repo.findById(id);
 		dBEmployee.setSalary(employee);
 		repo.save(dBEmployee);
 		return dBEmployee;
+	}
+	public Employee getEmployeeByEmail(String email) {
+		// TODO Auto-generated method stub
+		Employee employee = repo.getByEmail(email);
+		//System.out.println(employee);
+		return employee;
+	}
+	public Employee getEmployeeByPhone(long phone) {
+		// TODO Auto-generated method stub
+		Employee employee = repo.employeeByPhone(phone);
+		//System.out.println(employee);
+		return employee;
+	}
+	public List<Employee> getAllEmployeesBySalaryGreaterThan(double sal) {
+		// TODO Auto-generated method stub
+		
+		return repo.getBySalaryGreaterThan(sal);
 	}
 }

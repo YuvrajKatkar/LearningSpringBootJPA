@@ -15,15 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yuvraj.SpringBootEmployee.dao.EmployeeDao;
 import com.yuvraj.SpringBootEmployee.dto.Employee;
+import com.yuvraj.SpringBootEmployee.service.EmployeeService;
+import com.yuvraj.SpringBootEmployee.util.ResponseStructure;
 
 @RestController
 public class EmployeeController {
 	@Autowired
 	private EmployeeDao employeeDao;
-	
+	@Autowired
+	private EmployeeService employeeService;
 	@PostMapping("/saveEmployee")
-	public Employee saveEmployee(@RequestBody Employee employee) {
-		return employeeDao.saveEmployee(employee);
+	public ResponseStructure<Employee> saveEmployee(@RequestBody Employee employee) {
+		return employeeService.saveSetEmployeeGrade(employee);
 	}
 	@GetMapping("/findEmployee")
 	public Employee getEmployee(@RequestParam int id) {
@@ -33,13 +36,25 @@ public class EmployeeController {
 	public List<Employee> getAllEmployees(){
 		return employeeDao.getAllEmployees();
 	}
+	@GetMapping("/findAllSalary")
+	public List<Employee> getAllEmployeesBySalaryGreaterThan(@RequestParam double sal){
+		return employeeDao.getAllEmployeesBySalaryGreaterThan( sal );
+	}
+	@GetMapping("/getEmployeeByEmail")
+	public Employee getEmployeeByEmail(@RequestParam String email) {
+		return employeeDao.getEmployeeByEmail(email);
+	}
+	@GetMapping("/getEmployeeByPhone/{phone}")
+	public Employee getEmployeeByPhone(@PathVariable long phone) {
+		return employeeDao.getEmployeeByPhone(phone);
+	}
 	@DeleteMapping("/deleteEmployee/{id}")
 	public Employee deleteEmployee(@PathVariable int id) {
 		return employeeDao.deleteEmployee(id);
 	}
 	@PutMapping("/updateEmployee")
-	public Employee updateEmployee(@RequestParam int id,@RequestBody Employee employee) {
-		return employeeDao.updateEmployee( id,  employee);
+	public ResponseStructure<Employee> updateEmployee(@RequestParam int id,@RequestBody Employee employee) {
+		return employeeService.updateSetGradeEmployee(id,employee);
 	}
 	@PatchMapping("/updateEmployeeSalary")
 	public Employee updateEmployeeSalary(@RequestParam int id,@RequestParam int employee) {

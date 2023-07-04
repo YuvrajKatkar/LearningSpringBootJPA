@@ -1,5 +1,6 @@
 package com.yuvraj.SpringBootEmployee.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +17,10 @@ public class Employee {
 	private String name;
 	private long phone;
 	private String address;
+	@Column(unique = true)
+	private String email;
 	private double salary;
-	
+	private char grade;
 	public int getId() {
 		return id;
 	}
@@ -33,7 +36,7 @@ public class Employee {
 	public long getPhone() {
 		return phone;
 	}
-	public void setPlace(long hone) {
+	public void setPhone(long phone) {
 		this.phone = phone;
 	}
 	public String getAddress() {
@@ -42,21 +45,23 @@ public class Employee {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public double getSalary() {
 		return salary;
 	}
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
-	
-	public Employee(int id, String name, long phone, String address, double salary, char grade) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.phone = phone;
-		this.address = address;
-		this.salary = salary;
-		//this.grade = grade;
+	public char getGrade() {
+		return grade;
+	}
+	public void setGrade(char grade) {
+		this.grade = grade;
 	}
 	public Employee() {
 		super();
@@ -64,8 +69,10 @@ public class Employee {
 	}
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", phone=" + phone + ", address=" + address + ", salary="
-				+ salary + ", grade=" +  "]";
+		return "Employee [id=" + id + ", name=" + name + ", phone=" + phone + ", address=" + address + ", email="
+				+ email + ", salary=" + salary + ", grade=" + grade + "]";
 	}
+	
+	
 	
 }
