@@ -29,28 +29,28 @@ public class EmployeeController {
 		return employeeService.saveSetEmployeeGrade(employee);
 	}
 	@GetMapping("/findEmployee")
-	public Employee getEmployee(@RequestParam int id) {
-		return employeeDao.getEmployee(id);
+	public ResponseStructure<Employee> getEmployee(@RequestParam int id) {
+		return employeeService.getEmployee(id);
 	}
 	@GetMapping("/findAllEmployee")
-	public List<Employee> getAllEmployees(){
-		return employeeDao.getAllEmployees();
+	public ResponseStructure<List<Employee>> getAllEmployees(){
+		return employeeService.getAllEmployees();
 	}
 	@GetMapping("/findAllSalary")
-	public List<Employee> getAllEmployeesBySalaryGreaterThan(@RequestParam double sal){
-		return employeeDao.getAllEmployeesBySalaryGreaterThan( sal );
+	public ResponseStructure<List<Employee>> getAllEmployeesBySalaryGreaterThan(@RequestParam double sal){
+		return employeeService.getAllEmployeesBySalaryGreaterThan( sal );
 	}
 	@GetMapping("/getEmployeeByEmail")
-	public Employee getEmployeeByEmail(@RequestParam String email) {
-		return employeeDao.getEmployeeByEmail(email);
+	public ResponseStructure<Employee> getEmployeeByEmail(@RequestParam String email) {
+		return employeeService.getEmployeeByEmail(email);
 	}
 	@GetMapping("/getEmployeeByPhone/{phone}")
-	public Employee getEmployeeByPhone(@PathVariable long phone) {
-		return employeeDao.getEmployeeByPhone(phone);
+	public ResponseStructure<Employee> getEmployeeByPhone(@PathVariable long phone) {
+		return employeeService.getEmployeeByPhone(phone);
 	}
 	@DeleteMapping("/deleteEmployee/{id}")
-	public Employee deleteEmployee(@PathVariable int id) {
-		return employeeDao.deleteEmployee(id);
+	public ResponseStructure<Employee>  deleteEmployee(@PathVariable int id) {
+		return employeeService.deleteEmployee(id);
 	}
 	@PutMapping("/updateEmployee")
 	public ResponseStructure<Employee> updateEmployee(@RequestParam int id,@RequestBody Employee employee) {
